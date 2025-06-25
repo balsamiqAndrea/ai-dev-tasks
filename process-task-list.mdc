@@ -1,5 +1,5 @@
 ---
-description: 
+description: Guidelines for managing and processing task lists
 globs: 
 alwaysApply: false
 ---
@@ -38,6 +38,28 @@ Guidelines for managing task lists in markdown files to track progress on comple
    - List every file created or modified.
    - Give each file a one‑line description of its purpose.
 
+## Feature Completion and Archiving
+
+When a feature is 100% complete (all tasks marked `[x]`, implementation finished, tests passing, documentation updated):
+
+1. **Confirmation Protocol:**
+   - Announce to the user that the feature appears to be 100% complete
+   - Request explicit confirmation from the user before archiving
+   - Wait for user approval (must contain explicit confirmation like "yes", "confirm", "archive it")
+
+2. **Archiving Process (only after user confirmation):**
+   - Create `tasks/completed/` directory if it doesn't exist
+   - Move both the PRD file and task list file to `tasks/completed/`
+   - Preserve original filenames (e.g., `prd-share-urls-env.md` and `tasks-prd-share-urls-env.md`)
+   - Commit the archiving changes with message: `feat: archive completed [feature-name] PRD and tasks`
+
+3. **Archive Structure:**
+   ```
+   tasks/completed/
+   ├── prd-feature-name.md
+   └── tasks-prd-feature-name.md
+   ```
+
 ## AI Instructions
 
 When working with task lists, the AI must:
@@ -50,3 +72,4 @@ When working with task lists, the AI must:
 4. Keep "Relevant Files" accurate and up to date.
 5. Before starting work, check which sub‑task is next.
 6. After implementing a sub‑task, update the file and then pause for user approval.
+7. When all tasks are complete, follow the Feature Completion and Archiving protocol.
